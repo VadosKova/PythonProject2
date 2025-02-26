@@ -39,8 +39,8 @@ class Converter:
         self.result = Label(self.root, text="Result:")
         self.result.grid(row=2, column=0, padx=10, pady=10)
 
-        self.result_value = Label(self.root, text="")
-        self.result_value.grid(row=2, column=1, padx=10, pady=10)
+        self.show_res = Label(self.root, text="")
+        self.show_res.grid(row=2, column=1, padx=10, pady=10)
 
         self.from_label = Label(self.root, text="From:")
         self.from_label.grid(row=3, column=0, padx=10, pady=10)
@@ -88,3 +88,18 @@ class Converter:
         self.to_combo['values'] = units
         self.from_combo.set('')
         self.to_combo.set('')
+
+    def show_conversion(self):
+        try:
+            value = float(self.value_entry.get())
+            from_val = self.from_combo.get()
+            to_val = self.to_combo.get()
+
+            if from_val and to_val:
+                result = self.converter.convert(value, from_val, to_val)
+                if result is not None:
+                    self.show_res.config(text=f"{result} {to_val}")
+                else:
+                    self.show_res.config(text="Error")
+        except ValueError:
+            self.show_res.config(text="Error")
