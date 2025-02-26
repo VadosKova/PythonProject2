@@ -10,7 +10,7 @@ class Conversion:
     def __init__(self, root):
         self.root = root
         self.root.title("Converter")
-        self.root.geometry("400x300")
+        self.root.geometry("430x300")
 
         self.length_converter = LengthConverter()
         self.mass_converter = MassConverter()
@@ -21,8 +21,13 @@ class Conversion:
         self.type = StringVar()
 
         self.tools()
+        self.is_dark_theme = False
+        self.selected_theme()
 
     def tools(self):
+        self.theme_button = ttk.Button(self.root, text="Theme", command=self.toggle_theme)
+        self.theme_button.place(relx=1.0, rely=0.0, x=-80, y=10)
+
         self.type_label = Label(self.root, text="Choose conversion type:")
         self.type_label.grid(row=0, column=0, padx=10, pady=10)
 
@@ -54,7 +59,7 @@ class Conversion:
         self.to_combo = ttk.Combobox(self.root)
         self.to_combo.grid(row=4, column=1, padx=10, pady=10)
 
-        self.convert_btn = Button(self.root, text="Convert", command=self.show_conversion)
+        self.convert_btn = ttk.Button(self.root, text="Convert", command=self.show_conversion)
         self.convert_btn.grid(row=5, column=0, columnspan=2, pady=10)
 
     def selected_units(self, event=None):
@@ -103,6 +108,38 @@ class Conversion:
                     self.show_res.config(text="Error")
         except ValueError:
             self.show_res.config(text="Error")
+
+    def selected_theme(self):
+        if self.is_dark_theme:
+            self.root.configure(bg="black")
+            self.type_label.configure(foreground="white", background="black")
+            self.value.configure(foreground="white", background="black")
+            self.result.configure(foreground="white", background="black")
+            self.from_label.configure(foreground="white", background="black")
+            self.to_label.configure(foreground="white", background="black")
+            self.convert_btn.configure(style="TButton")
+            self.theme_button.configure(style="TButton")
+            self.type_combo.configure(style="TCombobox")
+            self.from_combo.configure(style="TCombobox")
+            self.to_combo.configure(style="TCombobox")
+            self.show_res.configure(foreground="white", background="black")
+        else:
+            self.root.configure(bg="white")
+            self.type_label.configure(foreground="black", background="white")
+            self.value.configure(foreground="black", background="white")
+            self.result.configure(foreground="black", background="white")
+            self.from_label.configure(foreground="black", background="white")
+            self.to_label.configure(foreground="black", background="white")
+            self.convert_btn.configure(style="TButton")
+            self.theme_button.configure(style="TButton")
+            self.type_combo.configure(style="TCombobox")
+            self.from_combo.configure(style="TCombobox")
+            self.to_combo.configure(style="TCombobox")
+            self.show_res.configure(foreground="black", background="white")
+
+    def toggle_theme(self):
+        self.is_dark_theme = not self.is_dark_theme
+        self.selected_theme()
 
 
 root = Tk()
