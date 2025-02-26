@@ -15,3 +15,42 @@ while True:
 
     type = input("Enter choice: ")
 
+    if type == "1":
+        units = ['m', 'km', 'cm', 'mm', 'mile']
+        converter = LengthConverter()
+    elif type == "2":
+        units = ['kg', 'g', 'mg', 'ton']
+        converter = MassConverter()
+    elif type == "3":
+        units = ['C', 'F']
+        converter = TemperatureConverter()
+    elif type == "4":
+        units = ['sec', 'min', 'hour']
+        converter = TimeConverter()
+    elif type == "5":
+        units = ['UAH', 'USD', 'EUR']
+        converter = CurrencyConverter()
+    elif type == "6":
+        print("Goodbye")
+        break
+    else:
+        print("Error")
+        continue
+
+    from_val = input(f"Enter start unit ({', '.join(units)}): ")
+    if from_val not in units:
+        print("Error")
+        continue
+
+    to_val = input(f"Enter finale unit ({', '.join(units)}): ")
+    if to_val not in units:
+        print("Error")
+        continue
+
+    value = float(input(f"Enter value {from_val}: "))
+    result = converter.convert(value, from_val, to_val)
+
+    if result is None:
+        print("Error")
+    else:
+        print(f"{value} {from_val} = {result} {to_val}")
