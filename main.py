@@ -22,11 +22,11 @@ while True:
         units = ['kg', 'g', 'mg', 'ton']
         converter = MassConverter()
     elif type == "3":
-        units = ['C', 'F']
-        converter = TemperatureConverter()
-    elif type == "4":
         units = ['sec', 'min', 'hour']
         converter = TimeConverter()
+    elif type == "4":
+        units = ['C', 'F']
+        converter = TemperatureConverter()
     elif type == "5":
         units = ['UAH', 'USD', 'EUR']
         converter = CurrencyConverter()
