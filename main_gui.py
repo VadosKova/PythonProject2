@@ -6,7 +6,7 @@ from time_converter import TimeConverter
 from temp_converter import TemperatureConverter
 from currency_converter import CurrencyConverter
 
-class Converter:
+class Conversion:
     def __init__(self, root):
         self.root = root
         self.root.title("Converter")
@@ -26,7 +26,7 @@ class Converter:
         self.type_label = Label(self.root, text="Choose conversion type:")
         self.type_label.grid(row=0, column=0, padx=10, pady=10)
 
-        self.type_combo = ttk.Combobox(self.root, textvariable=self.conversion_type, values=["Length", "Mass", "Time", "Temperature", "Currency"])
+        self.type_combo = ttk.Combobox(self.root, textvariable=self.type, values=["Length", "Mass", "Time", "Temperature", "Currency"])
         self.type_combo.grid(row=0, column=1, padx=10, pady=10)
         self.type_combo.bind("<<ComboboxSelected>>", self.selected_units)
 
@@ -103,3 +103,8 @@ class Converter:
                     self.show_res.config(text="Error")
         except ValueError:
             self.show_res.config(text="Error")
+
+
+root = Tk()
+app = Conversion(root)
+root.mainloop()
