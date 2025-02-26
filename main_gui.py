@@ -82,3 +82,9 @@ class Converter:
         else:
             units = []
             self.update_combo_options(units)
+
+    def update_combo_options(self, units):
+        self.from_combo['values'] = units
+        self.to_combo['values'] = units
+        self.from_combo.set('')
+        self.to_combo.set('')
