@@ -56,3 +56,29 @@ class Converter:
 
         self.convert_btn = Button(self.root, text="Convert", command=self.show_conversion)
         self.convert_btn.grid(row=5, column=0, columnspan=2, pady=10)
+
+    def selected_units(self, event=None):
+        type = self.type.get()
+        if type == "Length":
+            units = ['m', 'km', 'cm', 'mm', 'mile']
+            self.update_combo_options(units)
+            self.converter = self.length_converter
+        elif type == "Mass":
+            units = ['kg', 'g', 'mg', 'ton']
+            self.update_combo_options(units)
+            self.converter = self.mass_converter
+        elif type == "Time":
+            units = ['sec', 'min', 'hour']
+            self.update_combo_options(units)
+            self.converter = self.time_converter
+        elif type == "Temperature":
+            units = ['C', 'F']
+            self.update_combo_options(units)
+            self.converter = self.temp_converter
+        elif type == "Currency":
+            units = ['UAH', 'USD', 'EUR']
+            self.update_combo_options(units)
+            self.converter = self.currency_converter
+        else:
+            units = []
+            self.update_combo_options(units)
